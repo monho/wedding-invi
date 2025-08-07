@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { Modal } from 'flowbite-svelte';
 	import { DialogMode } from '../resource/utils';
+	import { addGuestMessage, updateGuestMessage, deleteGuestMessage } from '../lib/guestbook';
 
 	export let modalStatus: boolean;
 	export let name: string = '';
 	export let password: string = '';
 	export let message: string = '';
 	export let dialogMode: DialogMode = DialogMode.CREATE;
-	export let _id: string = '';
+	export let id: string = '';
 	export let guestMessages: Array<any>;
 
 	let title: string;
@@ -21,24 +22,11 @@
 	}
 
 	async function doEdit() {
-		const res = await fetch('/api/guestbook', {
-			method: 'PUT',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				_id,
-				password,
-				message
-			})
-		});
-
-		const { isUpdated } = await res.json();
+		const isUpdated = await updateGuestMessage(id, message, password);
 
 		if (isUpdated) {
 			guestMessages.forEach((guestMessage) => {
-				if (guestMessage._id === _id) {
+				if (guestMessage.id === id) {
 					guestMessage.message = message;
 				}
 			});
@@ -48,44 +36,16 @@
 		}
 	}
 
-	const getCurDateStr = () => {
-		const date = new Date();
-		const year = date.getFullYear();
-		const month = date.getMonth() + 1;
-		const day = date.getDate();
-		const hours = date.getHours();
-		const minutes = date.getMinutes();
-
-		const curDateStr: string =
-			year + '년 ' + month + '월 ' + day + '일 ' + hours + '시 ' + minutes + '분 ';
-		return curDateStr;
-	};
-
 	async function doPost() {
-		const postDate = getCurDateStr();
-		const res = await fetch('/api/guestbook', {
-			method: 'POST',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				name,
-				password,
-				message,
-				date: postDate
-			})
-		});
-
-		const { insertedId, date } = await res.json();
+		const insertedId = await addGuestMessage(name, message, password);
 
 		guestMessages = [
 			{
-				_id: insertedId,
+				id: insertedId,
 				name: name,
 				password: password,
 				message: message,
-				date: postDate
+				date: new Date()
 			},
 			...guestMessages
 		];
@@ -97,24 +57,12 @@
 	}
 
 	async function doDelete() {
-		const res = await fetch('/api/guestbook', {
-			method: 'DELETE',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				_id,
-				password
-			})
-		});
-
-		const { isUpdated } = await res.json();
+		const isUpdated = await deleteGuestMessage(id, password);
 		if (isUpdated) {
 			let removeId: number = 0;
 
 			guestMessages.forEach((message, index) => {
-				if (message._id === _id) {
+				if (message.id === id) {
 					removeId = index;
 				}
 			});
@@ -130,9 +78,7 @@
 	<div class="px-5 lg:px-8">
 		<form class="space-y-2">
 			<div>
-				<label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-					>이름</label
-				>
+				<label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">이름</label>
 				{#if dialogMode !== DialogMode.CREATE}
 					<input
 						disabled
@@ -146,9 +92,7 @@
 				{/if}
 			</div>
 			<div>
-				<label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-					>비밀번호</label
-				>
+				<label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">비밀번호</label>
 				<input
 					type="password"
 					class="w-full input-bordered rounded-lg"
@@ -158,9 +102,7 @@
 				/>
 			</div>
 			<div>
-				<label for="letter" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-					>내용</label
-				>
+				<label for="letter" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">내용</label>
 				{#if dialogMode !== DialogMode.DELETE}
 					<textarea
 						class="textarea w-full rounded-lg textarea-bordered h-24 bg-white"
@@ -178,27 +120,33 @@
 			</div>
 		</form>
 	</div>
+
+	<!-- Action buttons -->
 	{#if dialogMode === DialogMode.CREATE}
 		<button
 			class="inline-block text-black rounded bg-gray-200 px-2 pb-[5px] pt-[6px] font-medium text-base disabled:opacity-50"
 			disabled={!name || !password || !message}
-			on:click={doPost}>작성하기</button
-		>
+			on:click={doPost}>
+			작성하기
+		</button>
 	{:else if dialogMode === DialogMode.EDIT}
 		<button
 			class="inline-block text-black rounded bg-gray-200 px-2 pb-[5px] pt-[6px] font-medium text-base disabled:opacity-50"
 			disabled={!name || !password || !message}
-			on:click={doEdit}>수정하기</button
-		>
+			on:click={doEdit}>
+			수정하기
+		</button>
 	{:else}
 		<button
 			class="inline-block text-black rounded bg-gray-200 px-2 pb-[5px] pt-[6px] font-medium text-base disabled:opacity-50"
-			disabled={!name || !password || !message}
-			on:click={doDelete}>삭제하기</button
-		>
+			disabled={!name || !password}
+			on:click={doDelete}>
+			삭제하기
+		</button>
 	{/if}
-	<button
-		class="inline-block text-black rounded bg-gray-200 px-2 pb-[5px] pt-[6px] font-medium text-base"
-		>닫기</button
-	>
+
+	<!-- 닫기 버튼 -->
+	<button class="inline-block text-black rounded bg-gray-200 px-2 pb-[5px] pt-[6px] font-medium text-base">
+		닫기
+	</button>
 </Modal>

@@ -11,12 +11,11 @@
 	import GuestBook from '../components/GuestBook.svelte';
 	import Account from '../components/Account.svelte';
 	import {dday, mainDescription, mainImageURL, mainTitle, siteURL} from '../resource/input';
+	import { getGuestMessages } from '../lib/guestbook';
 
 	let guestMessages: Array<any> = [];
 	onMount(async () => {
-		const res = await fetch('/api/guestbook');
-		guestMessages = (await res.json()).guestbooks.reverse();
-		// Perform any initialization or data fetching here
+		guestMessages = await getGuestMessages();
 	});
 	let isTouched: boolean = false;
 	const imageUrl = mainImageURL;

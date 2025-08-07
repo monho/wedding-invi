@@ -1,6 +1,6 @@
 <script>
 
-	import { AccountInfo, brideName, groomName, mainMsg1, mainMsg2, mainMsg3, mainMsg4, mainMsg5, mainMsg6, mainMsg7, mainMsg8 } from "../resource/input";
+	import { AccountInfo, brideName, groomName, mainMsg1, mainMsg2, mainMsg3, mainMsg4, mainMsg5, mainMsg6, mainMsg7, mainMsg8 , mainMsg9 } from "../resource/input";
 
 </script>
 <h1 class="mb-8 text-3xl md:text-3xl font-bold text-center text-stone-600">모시는 말씀</h1>
@@ -19,6 +19,7 @@
 			<p class="leading-relaxed text-xl py-3">
 				{mainMsg7}<br />
 				{mainMsg8}<br />
+				{mainMsg9}<br />
 			</p>
 		</div>
 	</div>

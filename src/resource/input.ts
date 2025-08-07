@@ -1,22 +1,22 @@
 
 // main title
 
-export const mainTitle = '이신랑 ❤ 장신부의 결혼식에 초대합니다.'
-export const mainDescription = '2023년 10월 21일 토요일 11시 \n ABC 웨딩홀'
+export const mainTitle = '최영민 ❤ 방혜진의 결혼식에 초대합니다.'
+export const mainDescription = '2025년 9월 27일 토요일 11시 30분 \n 보람 컨벤션'
 
 // main info
-export const brideName = '이름'
-export const groomName = '이름'
+export const brideName = '최영민'
+export const groomName = '방혜진'
 
-export const brideFullName = '성이름'
-export const groomFullName = '성이름'
+export const brideFullName = '방혜진'
+export const groomFullName = '최영민'
 
 // account info 
 export const AccountInfo = {
 
-   groomName : '남신랑',
-   groomBank : '농협',
-   groomAccountNum : '123-456-789-1011',
+   groomName : '방혜진',
+   groomBank : '카카오뱅크',
+   groomAccountNum : '3333-2186-48-517',
    groomKakaoURL : 'https://qr.kakaopay.com/Ej8iC3z3c',
    
    groomFatherName : '신랑부',
@@ -51,14 +51,14 @@ export const AccountInfo = {
 
 
 // date, place 
-export const dday = [2025, 10, 21]
-export const timeStr = '토요일 12시 30분 '
-export const poiSubText = 'subtext'
-export const poiName = 'ABC 웨딩홀'
+export const dday = [2025, 9, 27]
+export const timeStr = '토요일 11시 30분 '
+export const poiSubText = ''
+export const poiName = '보람 컨벤션'
 export const address = '성남시 분당구 금곡동 정자일로 45'
 
-export const longitude: number = 37.457414
-export const latitude: number = 126.954047
+export const longitude: number = 35.547165
+export const latitude: number = 129.328031
 
 // location string
 export const privateCarMsg1 = '- 서울대입구역, 낙성대역에서 택시로 5~10분 소요'
@@ -77,13 +77,14 @@ export const publicTransportMsg5 = "- 관악선역(1번출구) ➡ 5516버스 �
 //main message text
 export const mainMsg1 = '각자 다른 화분에서 자란 넝쿨이'
 export const mainMsg2 = '서로에게 굴러 들어와'
-export const mainMsg3 = '7년동안 아름답게 얼기설기 엉켜'
+export const mainMsg3 = '1121일이라는 시간동안 아름답게 얼기설기 엉켜'
 export const mainMsg4 = '예쁜 꽃을 피웠습니다.'
 export const mainMsg5 = '이제는 하나의 화분에 모여'
 export const mainMsg6 = '새로운 출발을 하려합니다.'
 
-export const mainMsg7 = '바쁘시더라도 발걸음 내주시어'
-export const mainMsg8 = '저희의 앞날에 단단한 토양이 되어주세요.'
+export const mainMsg7 = '친구에서 연인으로, 연인에서 부부로'
+export const mainMsg8 = '평생 서로의 든든한 배우자로서'
+export const mainMsg9 = '서로의 삶에 꽃이 될 수 있게 저희의 단단한 토양이 되어주십시오.'
 
 // resource path
 export const mapImageSrc = "image/map.png"

@@ -17,6 +17,18 @@
 	let name: string;
 	let password: string;
 	let message: string;
+
+	const formatDate = (timestamp: any) => {
+		if (!timestamp) return '';
+		const date = timestamp.toDate();
+		return new Intl.DateTimeFormat('ko-KR', {
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric',
+			hour: 'numeric',
+			minute: 'numeric'
+		}).format(date);
+	};
 </script>
 
 <div class="py-5 mx-auto">
@@ -34,7 +46,7 @@
 						</div>
 						<div class="text-right">
 							<h1>{messageCard.name}</h1>
-							<span>{messageCard.date}</span>
+							<span>{formatDate(messageCard.date)}</span>
 						</div>
 					</div>
 				{/if}
@@ -52,12 +64,10 @@
 	</div>
 	<div class="flex-row justify-end flex items-end">
 		<button
-			disabled={guestMessages.length === 0}
 			class="btn inline-block text-black rounded bg-gray-200 px-2 m-2 pb-[5px] pt-[6px] font-medium text-base"
 			on:click={() => (overviewModal = true)}>전체보기</button
 		>
 		<button
-			disabled
 			class="btn inline-block text-black rounded bg-gray-200 px-2 m-2 pb-[5px] pt-[6px] font-medium text-base"
 			on:click={() => {
 				createModal = true;
@@ -74,10 +84,9 @@
 						<h1 class="text-base">{messageCard.name}</h1>
 						<div class="space-x-2">
 							<button
-								disabled
 								class="disabled:opacity-50"
 								on:click={() => {
-									messageID = messageCard._id;
+									messageID = messageCard.id;
 									name = messageCard.name;
 									password = '';
 									message = messageCard.message;
@@ -87,10 +96,9 @@
 								<Icon data={edit} />
 							</button>
 							<button
-								disabled
 								class="disabled:opacity-50"
 								on:click={() => {
-									messageID = messageCard._id;
+									messageID = messageCard.id;
 									name = messageCard.name;
 									password = '';
 									message = messageCard.message;
@@ -106,7 +114,7 @@
 					</div>
 					<div class="text-right">
 						<span class="text-sm mt-8">
-							{messageCard.date}
+							{formatDate(messageCard.date)}
 						</span>
 					</div>
 				</div>
@@ -132,7 +140,7 @@
 	<GuestBookDialog
 		dialogMode={DialogMode.EDIT}
 		bind:modalStatus={editModal}
-		bind:_id={messageID}
+		bind:id={messageID}
 		bind:name
 		bind:password
 		bind:message
@@ -141,7 +149,7 @@
 	<GuestBookDialog
 		dialogMode={DialogMode.DELETE}
 		bind:modalStatus={deleteModal}
-		bind:_id={messageID}
+		bind:id={messageID}
 		bind:name
 		bind:password
 		bind:message

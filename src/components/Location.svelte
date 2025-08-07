@@ -15,20 +15,6 @@
 		});
 	});
 
-	//티맵 길안내
-	function tMap(name: string, lat: number, lng: number) {
-		const href =
-			'https://apis.openapi.sk.com/tmap/app/routes?appKey=' +
-			String(env.PUBLIC_TMAP_API_KEY) +
-			'&name=' +
-			name +
-			'&lon=' +
-			lng +
-			'&lat=' +
-			lat;
-		return href;
-	}
-
 	//카카오맵 길안내
 	function kakaoMap(name: string, lat: number, lng: number) {
 		const href = 'https://map.kakao.com/link/to/' + name + ',' + lat + ',' + lng;
@@ -73,15 +59,7 @@
 				<img src="image/kakao.png" height="10" width="10" alt="" />
 				<span class="text-sm">카카오 지도</span>
 			</a>
-			<a
-				id="tmap-navi"
-				href={tMap(poiName, longitude, latitude)}
-				role="button"
-				class="btn mx-2 rounded-lg"
-			>
-				<img src="image/tmap.png" height="10" width="10" alt="" />
-				<span class="text-sm">티맵 내비</span>
-			</a>
+			
 			<a
 				id="naver-navi"
 				href={naverMap(poiName, longitude, latitude)}

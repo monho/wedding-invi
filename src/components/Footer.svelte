@@ -12,8 +12,8 @@
 	const description = dday[0] + '년 ' + dday[1] + '월 ' + dday[2] + '일 ' + timeStr + ' \n' + poiName;
 
 	onMount(() => {
-		Kakao.init(env.PUBLIC_KAKAO_JS_KEY);
-		Kakao.Share.createDefaultButton({
+		window.Kakao.init(env.PUBLIC_KAKAO_JS_KEY);
+		window.Kakao.Share.createDefaultButton({
 			container: '#kakao-share',
 			objectType: 'feed',
 			content: {
@@ -61,13 +61,11 @@
 
 <section>
 	<div class="text-center px-5 py-5">
-		<a
+		<button
 			id="kakao-share"
-			href="javascript:;"
-			role="button"
 			class="btn inline-block text-black rounded bg-gray-200 px-2 m-2 pb-[5px] pt-[11px] font-medium text-base"
 		>
-			카카오톡으로 공유</a
+			카카오톡으로 공유</button
 		>
 		<button
 			class="btn inline-block text-black rounded bg-gray-200 px-2 m-2 pb-[5px] pt-[6px] font-medium text-base"

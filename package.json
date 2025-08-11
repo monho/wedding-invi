@@ -18,7 +18,7 @@
 	"devDependencies": {
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-static": "^3.0.9",
-		"@sveltejs/adapter-vercel": "^5.8.1",
+		"@sveltejs/adapter-vercel": "^5.8.2",
 		"@sveltejs/kit": "^2.27.1",
 		"@sveltejs/vite-plugin-svelte": "^3.1.2",
 		"@types/navermaps": "3.6.5",

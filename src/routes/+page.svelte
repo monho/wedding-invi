@@ -1,43 +1,26 @@
 <script lang="ts">
-  // SSR 비활성화 & 정적 프리렌더
-  export const ssr = false;
-  export const prerender = true;
-
-  import { onMount } from 'svelte';
-  import Header from '../components/Header.svelte';
-  import MainImage from '../components/MainImage.svelte';
-  import MainMessage from '../components/MainMessage.svelte';
-  import AnimationFrame from '../components/AnimationFrame.svelte';
-  import Calendar from '../components/Calendar.svelte';
-  import Location from '../components/Location.svelte';
-  import Gallery from '../components/Gallery.svelte';
-  import Footer from '../components/Footer.svelte';
-  import GuestBook from '../components/GuestBook.svelte';
-  import Account from '../components/Account.svelte';
-  import { dday, mainDescription, mainImageURL, mainTitle, siteURL } from '../resource/input';
-
-  let guestMessages: Array<any> = [];
-
-  onMount(async () => {
-    // SSR 안전하게 동적 import
-    const { getGuestMessages } = await import('../lib/guestbook');
-    guestMessages = await getGuestMessages();
-  });
-
-  let isTouched: boolean = false;
-  const imageUrl = mainImageURL;
-  const siteUrl = siteURL;
-  const title = mainTitle;
-  const description = mainDescription;
+	import { onMount } from 'svelte';
+	import Header from '../components/Header.svelte';
+	import MainImage from '../components/MainImage.svelte';
+	import MainMessage from '../components/MainMessage.svelte';
+	import AnimationFrame from '../components/AnimationFrame.svelte';
+	import Calendar from '../components/Calendar.svelte';
+	import Location from '../components/Location.svelte';
+	import Gallery from '../components/Gallery.svelte';
+	import Footer from '../components/Footer.svelte';
+	import GuestBook from '../components/GuestBook.svelte';
+	import Account from '../components/Account.svelte';
+	import {dday, mainDescription, mainImageURL, mainTitle, siteURL} from '../resource/input';
+	import { getGuestMessages } from '../lib/guestbook';
 </script>
 
 <svelte:head>
-  <title>{title}</title>
-  <meta property="og:title" content={title} />
-  <meta property="og:url" content={siteUrl} />
-  <meta property="og:description" content={description} />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content={imageUrl} />
+	<title>{title}</title>
+	<meta property="og:title" content={title} />
+	<meta property="og:url" content={siteUrl} />
+	<meta property="og:description" content={description} />
+	<meta property="og:type" content="website" />
+	<meta property="og:image" content={imageUrl} />
 </svelte:head>
 
 <Header />
@@ -56,7 +39,7 @@
 <Footer />
 
 {#if !isTouched}
-  <AnimationFrame isHeartMode={true} />
+	<AnimationFrame isHeartMode={true} />
 {:else}
-  <AnimationFrame isHeartMode={false} />
+	<AnimationFrame isHeartMode={false} />
 {/if}

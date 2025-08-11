@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { env } from '$env/dynamic/public';
-	import { poiName, address, latitude, longitude, privateCarMsg1, privateCarMsg2, privateCarMsg3, privateCarMsg4, privateCarMsg5, privateCarMsg6, publicTransportMsg1, publicTransportMsg2, publicTransportMsg3, publicTransportMsg4, publicTransportMsg5, mapImageSrc } from '../resource/input';
+	import { poiName, address, latitude, longitude, privateCarMsg1, privateCarMsg2,privateCarMsg4, privateCarMsg5, privateCarMsg6, publicTransportMsg1, publicTransportMsg2, publicTransportMsg3, publicTransportMsg4, publicTransportMsg5, mapImageSrc } from '../resource/input';
 
 	onMount(() => {
 		let mapOption = new naver.maps.Map('naverMap', {
@@ -35,9 +35,8 @@
 </script>
 
 <svelte:head>
-	<script
-		src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId={env.PUBLIC_NAVER_API_KEY}"
-	></script>
+  <!-- 정적 삽입으로 쓸 때는 이렇게: -->
+  <script defer src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=s4ddmne9i5"></script>
 </svelte:head>
 
 <section>
@@ -79,10 +78,7 @@
 				<p class="leading-relaxed mt-1 text-base">
 					{privateCarMsg1} <br />
 					{privateCarMsg2} <br />
-					{privateCarMsg3} <br />
-					{privateCarMsg4} <br />
-					{privateCarMsg5} <br />
-					{privateCarMsg6}	
+					{privateCarMsg4} <br />	
 				</p>
 			</div>
 			<div class="card p-4 my-2 bg-base-100 shadow-xl">

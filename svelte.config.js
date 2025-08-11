@@ -1,8 +1,7 @@
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-vercel'; // 또는 adapter-static
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 export default {
-  kit: {
-    adapter: adapter(),
-    prerender: { entries: ['*'] } // 전 페이지 프리렌더
-  }
+  preprocess: vitePreprocess(),
+  kit: { adapter: adapter() }
 };

@@ -1,13 +1,12 @@
-import { sveltekit } from '@sveltejs/kit/vite';
-import { defineConfig } from 'vite';
-
-export default defineConfig({
-	plugins: [sveltekit()],
-	envDir: './',
-	server: {
-		fs: {
-			// Allow serving files from one level up to the project root
-			allow: ['..']
-		}
-	}
-});
+import adapter from '@sveltejs/adapter-auto';
+import { vitePreprocess } from '@sveltejs/kit/vite';
+import preprocess from 'svelte-preprocess';
+/** @type {import('@sveltejs/kit').Config} */
+const config = {
+	kit: {
+		adapter: adapter(),
+ 
+	},
+	preprocess: vitePreprocess()
+};
+export default config;
